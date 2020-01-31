@@ -487,6 +487,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05083a18df04b845a350cc90e925f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bigRobot: {fileID: 6280349061668173379, guid: 3c8d6c0a274767a48a158d06c2f02bf7,
+    type: 3}
 --- !u!1 &3698096703288662931
 GameObject:
   m_ObjectHideFlags: 0
