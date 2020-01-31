@@ -17,4 +17,9 @@ public class BulletBehaviour : MonoBehaviour
     {
         transform.position += transform.forward * Time.deltaTime * Speed;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
+    }
 }
