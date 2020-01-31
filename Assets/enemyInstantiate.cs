@@ -10,7 +10,7 @@ public class enemyInstantiate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        maxWaittime = 500;
+        maxWaittime = 700;
     }
 
     // Update is called once per frame
