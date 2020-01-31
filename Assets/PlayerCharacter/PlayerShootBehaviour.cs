@@ -37,7 +37,7 @@ public class PlayerShootBehaviour : MonoBehaviour
             float rotationAngle = Vector3.SignedAngle(TopHalf.forward, shootDirection, TopHalf.up);
             TopHalf.Rotate(TopHalf.up, rotationAngle);
 
-            if (SecToNextShot <= 0.0f)
+            if (SecToNextShot <= 0.0f && BulletPrefab != null)
             {
                 Instantiate(BulletPrefab, TopHalf.position, TopHalf.rotation);
                 SecToNextShot += SecBetweenShots;
