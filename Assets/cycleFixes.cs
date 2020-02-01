@@ -35,6 +35,22 @@ public class cycleFixes : MonoBehaviour
         {
             int randItem = Random.Range(0, 4);
             Instantiate(fixItems[randItem], bootyPosition, fixItems[randItem].transform.rotation);
+            if(randItem == 0)
+            {
+                GameObject.Find("BigRobot").tag = "Bullet2";
+            }
+            else if(randItem == 1)
+            {
+                GameObject.Find("BigRobot").tag = "Bullet4";
+            }
+            else if(randItem == 2)
+            {
+                GameObject.Find("BigRobot").tag = "Bullet1";
+            }
+            else if(randItem == 3)
+            {
+                GameObject.Find("BigRobot").tag = "Bullet3";
+            }
             yield return new WaitForSeconds(spawnTime);
             Destroy(GameObject.Find(fixItems[randItem].name + "(Clone)"));
         }
