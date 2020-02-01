@@ -35,7 +35,7 @@ public class ActivateWeapon : MonoBehaviour
             {
                 isActivated = true;
                 theOtherButton.GetComponent<ActivateWeapon>().SetActivated(!isActivated);
-                //pass bool to robo
+                bigRobot.GetComponent<RobotBehaviour>().ChangeWeapon(isMelee);
             }
         }
     }

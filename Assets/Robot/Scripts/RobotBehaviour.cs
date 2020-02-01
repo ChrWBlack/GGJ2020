@@ -126,6 +126,11 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         }
     }
 
+    public void ChangeWeapon(bool isMelee)
+    {
+        attackModeMelee = isMelee;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("RangeEnemy"))
