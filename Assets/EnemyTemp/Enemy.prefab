@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3040576399590436331}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 3698096702458156917}
   m_Layer: 0
   m_Name: Sphere (4)
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 3698096702468388617}
   m_Layer: 0
   m_Name: Sphere (1)
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 3698096702835052161}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 3698096702979913958}
   m_Layer: 0
   m_Name: Sphere (3)
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 716985195133551963}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,8 +583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05083a18df04b845a350cc90e925f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bigRobot: {fileID: 6280349061668173379, guid: 3c8d6c0a274767a48a158d06c2f02bf7,
-    type: 3}
+  TargetPosition: {x: 0, y: 2.3, z: 30}
 --- !u!54 &716985195133551963
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -615,7 +614,7 @@ GameObject:
   - component: {fileID: 3698096703288662932}
   m_Layer: 0
   m_Name: Sphere (2)
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -708,7 +707,7 @@ GameObject:
   - component: {fileID: 3698096703584392338}
   m_Layer: 0
   m_Name: Capsule
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -802,7 +801,7 @@ GameObject:
   - component: {fileID: 3698096703841575429}
   m_Layer: 0
   m_Name: Sphere (5)
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -895,7 +894,7 @@ GameObject:
   - component: {fileID: 3698096704229302794}
   m_Layer: 0
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -989,7 +988,7 @@ GameObject:
   - component: {fileID: 3698096704281950543}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1083,7 +1082,7 @@ GameObject:
   - component: {fileID: 853286866344465125}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: MeleeEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

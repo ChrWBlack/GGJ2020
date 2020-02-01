@@ -21,7 +21,7 @@ public class enemyInstantiate : MonoBehaviour
         if (modifier == maxWaittime - 1)
         {
             Instantiate(enemyPrefab, transform.position, transform.rotation);
-            Debug.Log("Enemy spawned");
+            //Debug.Log("Enemy spawned");
         }
     }
 }

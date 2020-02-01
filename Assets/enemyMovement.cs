@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyMovement : MonoBehaviour
+public class enemyMovement : MonoBehaviour, IDamageable
 {
-    public GameObject bigRobot;
+    public Vector3 TargetPosition;
     Vector3 direction;
     Vector3 newDirection;
     Rigidbody enemyBody;
     int move;
     bool manners;
     float height;
+
+    public int MaxHealth = 1;
+    private int currentHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -34,49 +37,46 @@ public class enemyMovement : MonoBehaviour
         {
             meleeAttack();
         }
-        else if(move == 3)
-        {
-            doNothing();
-            //manners = true;
-            //move = 1;
-        }
-        Destroy(gameObject, 7.0f);
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "Enemy(Clone)" || other.gameObject.name == "Enemy1(Clone)")
-        {
-            if(move != 2)
-            {
-                move = 1;
-            }
-        }
-        if (other.gameObject.name == "BigRobot")
+        //Destroy(gameObject, 7.0f);
+        if ((transform.position - TargetPosition).sqrMagnitude < 9)
         {
             move = 2;
         }
-        //Debug.Log(other.gameObject.name);
-        
     }
 
     void movetoAttack()
     {
-        direction = bigRobot.transform.position - transform.position;
-        float speed = 5.0f * Time.deltaTime;
+        direction = TargetPosition - transform.position;
+        float speed = 20.0f * Time.deltaTime;
         newDirection = Vector3.RotateTowards(transform.forward, direction, speed, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
-        transform.position = Vector3.MoveTowards(transform.position, bigRobot.transform.position, speed);
+        transform.position = Vector3.MoveTowards(transform.position, TargetPosition, speed);
         
     }
 
     void meleeAttack()
     {
-        Debug.Log("ATTACK mofo!!");
+        //Debug.Log("ATTACK mofo!!");
     }
 
-    void doNothing()
+    public void ReceiveDamage(int damage)
     {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
+    public void RestoreHealth(int health)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + health, health, MaxHealth);
+
+    }
+
+    public string GetTag()
+    {
+        return tag;
     }
 }
