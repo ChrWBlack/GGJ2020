@@ -218,6 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 300
+  rotationDirection: 1
   rotateX: 0
   rotateY: 0
   rotateZ: 1
