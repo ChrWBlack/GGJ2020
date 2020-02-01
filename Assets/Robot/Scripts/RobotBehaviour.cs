@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,15 +13,20 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     public Transform UpperBody;
     public Transform ProjectileSpawn;
     public float SecBetweenAttacks;
+    public GameObject tutorialManager;
     private float healthPoints;
     private HealthBarBehaviour healthBar;
     private Animator animator;
     private float SecToNextAttack = 0.0f;
 
+    public event Action OnDeath;
+
     // true = melee, false = range
     private bool attackModeMelee = true;
     private bool enemydetected = false;
     private bool isUntouchable = true;
+    private bool isInTutorial = true;
+    private bool isDead = false;
 
     private List<Transform> rangeEnemies = new List<Transform>();
     private List<Transform> meleeEnemies = new List<Transform>();
@@ -40,16 +46,27 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         }
         healthPoints = Mathf.Clamp(healthPoints - damage, 0, MaxHealth);
         UpdateHealthBar();
+
+        if (healthPoints <= 0)
+        {
+            isDead = true;
+            OnDeath.Invoke();
+        }
     }
 
     public void RestoreHealth(int health)
     {
-        if (isUntouchable)
+        if (isUntouchable || isDead)
         {
             return;
         }
         int unitsAttacking = rangeEnemies.Count + meleeEnemies.Count;
-        healthPoints = Mathf.Clamp(healthPoints + (health * ( 2.0f - (MaxHealth - healthPoints) / MaxHealth) * (unitsAttacking)), 0, MaxHealth);
+        healthPoints = Mathf.Clamp(healthPoints + (health * ( 2.0f - (MaxHealth - healthPoints) / MaxHealth) * (unitsAttacking + 1)), 0, MaxHealth);
+        if (isInTutorial && healthPoints >= 80)
+        {
+            tutorialManager.GetComponent<Tutorial>().NewMessage(1);
+            isInTutorial = false;
+        }
         UpdateHealthBar();
     }
 
@@ -60,7 +77,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         Vector3 healthbarPosition = transform.position;
         healthbarPosition.y = 10.5f;
         healthBar.transform.position = healthbarPosition;
-        healthPoints = MaxHealth;
+        healthPoints = MaxHealth * 0.5f;
         healthBar.AngleToCamera();
         UpdateHealthBar();
         Barricade.material.mainTextureScale = new Vector2(1, 1);

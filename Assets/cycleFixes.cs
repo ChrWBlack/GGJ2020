@@ -41,7 +41,7 @@ public class cycleFixes : MonoBehaviour
             currentDisplay.transform.localScale = Vector3.zero;
             while (currentDisplay.transform.localScale.x < targetScale.x  - float.Epsilon)
             {
-                currentDisplay.transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, timer * 1.5f);
+                currentDisplay.transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, timer * 1.0f);
                 yield return new WaitForEndOfFrame();
                 timer += Time.deltaTime;
             }

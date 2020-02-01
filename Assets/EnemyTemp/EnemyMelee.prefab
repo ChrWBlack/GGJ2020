@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetPosition: {x: 0, y: 0, z: 0}
   Animator: {fileID: 5831029721177880436}
+  spawnEffect: {fileID: 100008, guid: 1ca16f2a31fb6a548ad8954bed1d321f, type: 3}
   AttacksPerSecond: 2
   MaxHealth: 1
 --- !u!54 &716985195133551963
