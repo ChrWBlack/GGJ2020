@@ -15,4 +15,13 @@ public class meteorFall : MonoBehaviour
     {
         gameObject.GetComponent<Rigidbody>().AddForce(Vector3.down, ForceMode.Force);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.name == "Ground")
+        {
+            Debug.Log("Ground detected");
+            Destroy(gameObject);
+        }
+    }
 }
