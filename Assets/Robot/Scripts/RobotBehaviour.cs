@@ -118,6 +118,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         else if (other.CompareTag("MeleeEnemy"))
         {
             meleeEnemies.Add(other.transform);
+            Debug.Log("ENEMY DETECTED");
         }
     }
 
@@ -130,6 +131,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         else if (other.CompareTag("MeleeEnemy"))
         {
             meleeEnemies.Remove(other.transform);
+            Debug.Log("ENEMY REMOVED");
         }
     }
 }
