@@ -24,7 +24,7 @@ public class cycleFixes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawnTime = Random.Range(leastCycleTime, maxCycleTime);
+
     }
 
     IEnumerator cycleItems()
@@ -35,7 +35,19 @@ public class cycleFixes : MonoBehaviour
             int randItem = Random.Range(0, 4);
             currentDisplay = Instantiate(fixItems[randItem], transform.position, fixItems[randItem].transform.rotation);
             currentDisplay.transform.parent = transform;
-            if(randItem == 0)
+
+            Vector3 targetScale = currentDisplay.transform.localScale;
+            float timer = 0.0f;
+            currentDisplay.transform.localScale = Vector3.zero;
+            while (currentDisplay.transform.localScale.x < targetScale.x  - float.Epsilon)
+            {
+                currentDisplay.transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, timer * 1.5f);
+                yield return new WaitForEndOfFrame();
+                timer += Time.deltaTime;
+            }
+
+            daRobot.GetComponent<RobotBehaviour>().SetUntachable(false);
+            if (randItem == 0)
             {
                 daRobot.tag = "Bullet2";
             }
@@ -51,7 +63,18 @@ public class cycleFixes : MonoBehaviour
             {
                 daRobot.tag = "Bullet3";
             }
+            spawnTime = Random.Range(leastCycleTime, maxCycleTime);
             yield return new WaitForSeconds(spawnTime);
+
+            daRobot.GetComponent<RobotBehaviour>().SetUntachable(true);
+            Vector3 startScale = currentDisplay.transform.localScale;
+            timer = 0.0f;
+            while (currentDisplay.transform.localScale.x > float.Epsilon)
+            {
+                currentDisplay.transform.localScale = Vector3.Lerp(startScale, Vector3.zero, timer * 1.5f);
+                yield return new WaitForEndOfFrame();
+                timer += Time.deltaTime;
+            }
             Destroy(currentDisplay);
         }
     }

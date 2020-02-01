@@ -20,9 +20,12 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     // true = melee, false = range
     private bool attackModeMelee = true;
     private bool enemydetected = false;
+    private bool isUntouchable = true;
 
     private List<Transform> rangeEnemies = new List<Transform>();
     private List<Transform> meleeEnemies = new List<Transform>();
+
+    public MeshRenderer Barricade;
 
     public string GetTag()
     {
@@ -31,12 +34,20 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
 
     public void ReceiveDamage(int damage)
     {
+        if (isUntouchable)
+        {
+            return;
+        }
         healthPoints = Mathf.Clamp(healthPoints - damage, 0, MaxHealth);
         UpdateHealthBar();
     }
 
     public void RestoreHealth(int health)
     {
+        if (isUntouchable)
+        {
+            return;
+        }
         int unitsAttacking = rangeEnemies.Count + meleeEnemies.Count;
         healthPoints = Mathf.Clamp(healthPoints + (health * ( 2.0f - (MaxHealth - healthPoints) / MaxHealth) * (unitsAttacking)), 0, MaxHealth);
         UpdateHealthBar();
@@ -52,6 +63,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         healthPoints = MaxHealth;
         healthBar.AngleToCamera();
         UpdateHealthBar();
+        Barricade.material.mainTextureScale = new Vector2(1, 1);
 
         SecToNextAttack = SecBetweenAttacks;
 
@@ -104,8 +116,8 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         }
         else
         {
-            MeleeCollider.enabled = true;
-            if (SecToNextAttack <= 0.0f && enemydetected)
+            MeleeCollider.enabled = attackModeMelee;
+            if (SecToNextAttack <= 0.0f && enemydetected && !isUntouchable)
             {
                 animator.SetTrigger(attackModeMelee ? RobotAnimationConstants.AnimDrill : RobotAnimationConstants.AnimShoot);
                 SecToNextAttack += SecBetweenAttacks;
@@ -156,6 +168,26 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         else if (other.CompareTag("MeleeEnemy"))
         {
             meleeEnemies.Remove(other.transform);
+        }
+    }
+
+    public void SetUntachable(bool untouchable)
+    {
+        isUntouchable = untouchable;
+        //Barricade.material.mainTextureScale = new Vector2(1, untouchable ? 1 : 7);
+        StartCoroutine(FadeBarricade());
+    }
+
+    IEnumerator FadeBarricade()
+    {
+        float target = isUntouchable ? 1 : 7;
+        float start = isUntouchable ? 7 : 1;
+        Barricade.material.mainTextureScale = new Vector2(1, start);
+        while (Barricade.material.mainTextureScale.y != target)
+        {
+            yield return new WaitForEndOfFrame();
+            float yScale = Mathf.Clamp(Barricade.material.mainTextureScale.y + ((target - start) * Time.deltaTime * 2.5f), 1, 7);
+            Barricade.material.mainTextureScale = new Vector2(1, yScale);
         }
     }
 }
