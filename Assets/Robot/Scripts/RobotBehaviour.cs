@@ -12,8 +12,11 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     private HealthBarBehaviour healthBar;
     private Animator animator;
 
-    private List<Transform> RangeEnemies = new List<Transform>();
-    private List<Transform> MeleeEnemies = new List<Transform>();
+    // true = melee, false = range
+    private bool attackModeMelee = true;
+
+    private List<Transform> rangeEnemies = new List<Transform>();
+    private List<Transform> meleeEnemies = new List<Transform>();
 
     public string GetTag()
     {
@@ -51,7 +54,24 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
+        Vector3 targetDirection = Vector3.zero;
+        if (attackModeMelee && meleeEnemies.Count > 0)
+        {
+            targetDirection = meleeEnemies[0].position - transform.position;
+            targetDirection.y = 0;
+        }
+        else if (!attackModeMelee && rangeEnemies.Count > 0)
+        {
+            targetDirection = rangeEnemies[0].position - transform.position;
+            targetDirection.y = 0;
+        }
 
+        targetDirection.Normalize();
+
+        // Rotate top half of character
+        float rotationAngle = Vector3.SignedAngle(transform.forward, targetDirection, transform.up);
+        transform.Rotate(transform.up, rotationAngle);
+        UpdateAnimator();
     }
 
     void UpdateHealthBar()
@@ -68,6 +88,30 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         else
         {
             animator.SetInteger(RobotAnimationConstants.AnimationState, RobotAnimationConstants.AnimIdle);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("RangeEnemy"))
+        {
+            rangeEnemies.Add(other.transform);
+        }
+        else if (other.CompareTag("MeleeEnemy"))
+        {
+            meleeEnemies.Add(other.transform);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("RangeEnemy"))
+        {
+            rangeEnemies.Remove(other.transform);
+        }
+        else if (other.CompareTag("MeleeEnemy"))
+        {
+            meleeEnemies.Remove(other.transform);
         }
     }
 }

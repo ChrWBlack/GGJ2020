@@ -5,15 +5,18 @@ using UnityEngine;
 public class PlayerShootBehaviour : MonoBehaviour
 {
     public Transform TopHalf;
+    public Transform BulletSpawn;
     public float SecBetweenShots;
     public GameObject BulletPrefab;
 
     private float SecToNextShot = 0.0f;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         SecToNextShot = SecBetweenShots;
+        animator = TopHalf.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -31,6 +34,8 @@ public class PlayerShootBehaviour : MonoBehaviour
 
         if (shootDirection.sqrMagnitude > 0.5f)
         {
+            animator.SetInteger(PlayerAnimationConstants.AnimationState, PlayerAnimationConstants.PlayerThrowing);
+
             shootDirection.Normalize();
 
             // Rotate top half of character
@@ -39,9 +44,13 @@ public class PlayerShootBehaviour : MonoBehaviour
 
             if (SecToNextShot <= 0.0f && BulletPrefab != null)
             {
-                Instantiate(BulletPrefab, TopHalf.position, TopHalf.rotation);
+                Instantiate(BulletPrefab, BulletSpawn.position, TopHalf.rotation);
                 SecToNextShot += SecBetweenShots;
             }
+        }
+        else
+        {
+            animator.SetInteger(PlayerAnimationConstants.AnimationState, PlayerAnimationConstants.PlayerRunning);
         }
     }
 }
