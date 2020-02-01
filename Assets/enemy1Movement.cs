@@ -5,6 +5,7 @@ using UnityEngine;
 public class enemy1Movement : MonoBehaviour, IDamageable
 {
     public Vector3 TargetPosition;
+    public Animator Animator;
     Vector3 direction;
     Vector3 newDirection;
     Vector3 randPosition;
@@ -13,6 +14,8 @@ public class enemy1Movement : MonoBehaviour, IDamageable
 
     public int MaxHealth = 1;
     private int currentHealth;
+
+    private IDamageable damageableTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +53,12 @@ public class enemy1Movement : MonoBehaviour, IDamageable
 
     void fireAttack()
     {
-        Debug.Log("ATTACK MOFO");
+        Animator.SetInteger("AnimationState", 1);
+    }
+
+    public void SetTargetDamageable(IDamageable damageable)
+    {
+        damageableTarget = damageable;
     }
 
     public void ReceiveDamage(int damage)
