@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,11 +19,14 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     private Animator animator;
     private float SecToNextAttack = 0.0f;
 
+    public event Action OnDeath;
+
     // true = melee, false = range
     private bool attackModeMelee = true;
     private bool enemydetected = false;
     private bool isUntouchable = true;
     private bool isInTutorial = true;
+    private bool isDead = false;
 
     private List<Transform> rangeEnemies = new List<Transform>();
     private List<Transform> meleeEnemies = new List<Transform>();
@@ -42,11 +46,17 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         }
         healthPoints = Mathf.Clamp(healthPoints - damage, 0, MaxHealth);
         UpdateHealthBar();
+
+        if (healthPoints <= 0)
+        {
+            isDead = true;
+            OnDeath.Invoke();
+        }
     }
 
     public void RestoreHealth(int health)
     {
-        if (isUntouchable)
+        if (isUntouchable || isDead)
         {
             return;
         }
