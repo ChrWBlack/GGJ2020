@@ -8,6 +8,8 @@ TagManager:
   - Bullet2
   - Bullet3
   - Bullet4
+  - MeleeEnemy
+  - RangeEnemy
   layers:
   - Default
   - TransparentFX

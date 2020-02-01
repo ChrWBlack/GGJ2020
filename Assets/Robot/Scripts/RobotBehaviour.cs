@@ -8,9 +8,11 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     public float DamagedThreshold;
     public int MaxHealth;
     public Transform UpperBody;
+    public float SecBetweenAttacks;
     private int healthPoints;
     private HealthBarBehaviour healthBar;
     private Animator animator;
+    private float SecToNextAttack = 0.0f;
 
     // true = melee, false = range
     private bool attackModeMelee = true;
@@ -27,14 +29,14 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     {
         healthPoints = Mathf.Clamp(healthPoints - damage, 0, MaxHealth);
         UpdateHealthBar();
-        UpdateAnimator();
+        //UpdateAnimator();
     }
 
     public void RestoreHealth(int health)
     {
         healthPoints = Mathf.Clamp(healthPoints + health, 0, MaxHealth);
         UpdateHealthBar();
-        UpdateAnimator();
+        //UpdateAnimator();
     }
 
     // Start is called before the first frame update
@@ -48,12 +50,19 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         healthBar.AngleToCamera();
         UpdateHealthBar();
 
+        SecToNextAttack = SecBetweenAttacks;
+
         animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (SecToNextAttack > 0.0f)
+        {
+            SecToNextAttack -= Time.deltaTime;
+        }
+
         Vector3 targetDirection = Vector3.zero;
         if (attackModeMelee && meleeEnemies.Count > 0)
         {
@@ -71,6 +80,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         // Rotate top half of character
         float rotationAngle = Vector3.SignedAngle(transform.forward, targetDirection, transform.up);
         transform.Rotate(transform.up, rotationAngle);
+
         UpdateAnimator();
     }
 
@@ -87,7 +97,15 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         }
         else
         {
-            animator.SetInteger(RobotAnimationConstants.AnimationState, RobotAnimationConstants.AnimIdle);
+            if (SecToNextAttack <= 0.0f)
+            {
+                animator.SetInteger(RobotAnimationConstants.AnimationState, attackModeMelee ? RobotAnimationConstants.AnimDrill : RobotAnimationConstants.AnimShoot);
+                SecToNextAttack += SecBetweenAttacks;
+            }
+            else
+            {
+                animator.SetInteger(RobotAnimationConstants.AnimationState, RobotAnimationConstants.AnimIdle);
+            }
         }
     }
 
