@@ -9,8 +9,6 @@ public class enemyMovement : MonoBehaviour, IDamageable
     Vector3 newDirection;
     Rigidbody enemyBody;
     int move;
-    bool manners;
-    float height;
 
     public int MaxHealth = 1;
     private int currentHealth;
@@ -21,8 +19,7 @@ public class enemyMovement : MonoBehaviour, IDamageable
         enemyBody = gameObject.GetComponent<Rigidbody>();
         //enemyBody.isKinematic = true;
         move = 1;
-        manners = true;
-        height = 1f;
+        currentHealth = MaxHealth;
     }
 
     // Update is called once per frame
