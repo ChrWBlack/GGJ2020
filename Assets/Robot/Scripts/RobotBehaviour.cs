@@ -7,9 +7,13 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     public GameObject HealthBarPrefab;
     public float DamagedThreshold;
     public int MaxHealth;
+    public Transform UpperBody;
     private int healthPoints;
     private HealthBarBehaviour healthBar;
     private Animator animator;
+
+    private List<Transform> RangeEnemies = new List<Transform>();
+    private List<Transform> MeleeEnemies = new List<Transform>();
 
     public string GetTag()
     {
@@ -47,7 +51,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void UpdateHealthBar()
