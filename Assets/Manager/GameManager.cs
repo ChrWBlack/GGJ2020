@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public RobotBehaviour Robot;
+    public Tutorial TutorialManager;
     private float gameTime = 0.0f;
     private bool gameRunning = false;
 
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Robot.OnDeath += OnRobotDeath;
+        TutorialManager.TutorialFinished += OnGameStart;
     }
 
     // Update is called once per frame

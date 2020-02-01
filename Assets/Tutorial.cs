@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +28,7 @@ public class Tutorial : MonoBehaviour
     public GameObject smokeSmall;
     public GameObject smokeBig;
 
+    public event Action TutorialFinished;
 
     public bool newMessage;
 
@@ -76,6 +78,8 @@ public class Tutorial : MonoBehaviour
     {
         tutText.text = "enemies will now spawn. Robo will atack when above 80% HP";
         enemySpawner.SetActive(true);
+        TutorialFinished.Invoke();
+        ClearMessage();
     }
 
     private void Start()
