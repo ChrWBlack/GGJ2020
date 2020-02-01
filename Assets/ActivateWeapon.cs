@@ -17,7 +17,7 @@ public class ActivateWeapon : MonoBehaviour
     {
         if (isActivated)
         {
-            label.transform.Rotate(Vector3.forward * 300.0f * rotationDirection * Time.deltaTime);
+            label.transform.Rotate(Vector3.forward * 100.0f * rotationDirection * Time.deltaTime);
             if (label.transform.rotation.z <= -0.5f || label.transform.rotation.z >= 0.5f)
             {
                 rotationDirection *= -1.0f;

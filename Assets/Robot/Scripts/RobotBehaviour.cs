@@ -12,7 +12,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     public Transform UpperBody;
     public Transform ProjectileSpawn;
     public float SecBetweenAttacks;
-    private int healthPoints;
+    private float healthPoints;
     private HealthBarBehaviour healthBar;
     private Animator animator;
     private float SecToNextAttack = 0.0f;
@@ -37,7 +37,8 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
 
     public void RestoreHealth(int health)
     {
-        healthPoints = Mathf.Clamp(healthPoints + health, 0, MaxHealth);
+        int unitsAttacking = rangeEnemies.Count + meleeEnemies.Count;
+        healthPoints = Mathf.Clamp(healthPoints + (health * ( 2.0f - (MaxHealth - healthPoints) / MaxHealth) * (unitsAttacking)), 0, MaxHealth);
         UpdateHealthBar();
     }
 

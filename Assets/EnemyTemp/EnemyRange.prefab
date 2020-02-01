@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2880356785617735630}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -3.64, y: 4.03, z: -3.64}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 7059812652587541529}
   m_Father: {fileID: 0}
@@ -62,8 +62,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 757a0af8573a29c4da7d5a52249481d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetPosition: {x: 0, y: 0, z: 30}
+  TargetPosition: {x: 0, y: 0, z: 0}
   Animator: {fileID: 5633217517155754161}
+  AttacksPerSecond: 2
   MaxHealth: 1
 --- !u!136 &6283670793109857569
 CapsuleCollider:
