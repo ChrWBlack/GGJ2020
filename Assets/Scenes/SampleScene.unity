@@ -726,6 +726,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AmmoStation_1
       objectReference: {fileID: 0}
+    - target: {fileID: 3802765391597650758, guid: 120d53c83eb06ef4d9f7ef4fbe8b07a4,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 120d53c83eb06ef4d9f7ef4fbe8b07a4, type: 3}
 --- !u!1001 &4012874847489399754
