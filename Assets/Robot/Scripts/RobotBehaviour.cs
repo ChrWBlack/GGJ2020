@@ -12,6 +12,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     public Transform UpperBody;
     public Transform ProjectileSpawn;
     public float SecBetweenAttacks;
+    public GameObject tutorialManager;
     private float healthPoints;
     private HealthBarBehaviour healthBar;
     private Animator animator;
@@ -21,6 +22,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     private bool attackModeMelee = true;
     private bool enemydetected = false;
     private bool isUntouchable = true;
+    private bool isInTutorial = true;
 
     private List<Transform> rangeEnemies = new List<Transform>();
     private List<Transform> meleeEnemies = new List<Transform>();
@@ -49,7 +51,12 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
             return;
         }
         int unitsAttacking = rangeEnemies.Count + meleeEnemies.Count;
-        healthPoints = Mathf.Clamp(healthPoints + (health * ( 2.0f - (MaxHealth - healthPoints) / MaxHealth) * (unitsAttacking)), 0, MaxHealth);
+        healthPoints = Mathf.Clamp(healthPoints + (health * ( 2.0f - (MaxHealth - healthPoints) / MaxHealth) * (unitsAttacking + 1)), 0, MaxHealth);
+        if (isInTutorial && healthPoints >= 80)
+        {
+            tutorialManager.GetComponent<Tutorial>().NewMessage(1);
+            isInTutorial = false;
+        }
         UpdateHealthBar();
     }
 
@@ -60,7 +67,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         Vector3 healthbarPosition = transform.position;
         healthbarPosition.y = 10.5f;
         healthBar.transform.position = healthbarPosition;
-        healthPoints = MaxHealth;
+        healthPoints = MaxHealth * 0.5f;
         healthBar.AngleToCamera();
         UpdateHealthBar();
         Barricade.material.mainTextureScale = new Vector2(1, 1);
