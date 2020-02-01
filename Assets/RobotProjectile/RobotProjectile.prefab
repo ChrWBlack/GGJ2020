@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5940872768386794261}
   - component: {fileID: 5940872768386794262}
   - component: {fileID: 5940872768386794263}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5940872768762690252}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fin1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 5940872768950298187}
   - component: {fileID: 5940872768950298188}
   - component: {fileID: 5940872768950298189}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5940872769022558479}
   - component: {fileID: 9123238969565537280}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RobotProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,6 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b26d78c5aeb0c9546b14a3188e92a93a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 40
 --- !u!1 &5940872769024350500
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,7 +281,7 @@ GameObject:
   - component: {fileID: 5940872769024350496}
   - component: {fileID: 5940872769024350497}
   - component: {fileID: 5940872769024350498}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -374,7 +375,7 @@ GameObject:
   - component: {fileID: 5940872769142469272}
   - component: {fileID: 5940872769142469273}
   - component: {fileID: 5940872769142469274}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Quad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -465,7 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5940872769285747465}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fin3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -497,7 +498,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5940872769591029095}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Fin2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -532,7 +533,7 @@ GameObject:
   - component: {fileID: 5940872769653487712}
   - component: {fileID: 5940872769653487713}
   - component: {fileID: 5940872769653487714}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Quad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +627,7 @@ GameObject:
   - component: {fileID: 5940872769984251647}
   - component: {fileID: 5940872769984251632}
   - component: {fileID: 5940872769984251633}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +721,7 @@ GameObject:
   - component: {fileID: 5940872769989060369}
   - component: {fileID: 5940872769989060370}
   - component: {fileID: 5940872769989060371}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +815,7 @@ GameObject:
   - component: {fileID: 5940872770058663025}
   - component: {fileID: 5940872770058663026}
   - component: {fileID: 5940872770058663027}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Quad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

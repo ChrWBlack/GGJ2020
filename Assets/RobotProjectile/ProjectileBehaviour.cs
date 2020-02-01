@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ProjectileBehaviour : MonoBehaviour
 {
+    public float Speed = 25.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,17 +15,21 @@ public class ProjectileBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += transform.forward * Time.deltaTime * Speed;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        IDamageable damageable = collision.gameObject.GetComponentInParent<IDamageable>();
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        IDamageable damageable = other.gameObject.GetComponentInParent<IDamageable>();
         if (damageable != null)
         {
             damageable.ReceiveDamage(5);
         }
-
         Destroy(gameObject);
     }
 }

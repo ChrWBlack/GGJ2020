@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemyMovement : MonoBehaviour
+public class enemyMovement : MonoBehaviour, IDamageable
 {
     public Vector3 TargetPosition;
     Vector3 direction;
@@ -11,6 +11,9 @@ public class enemyMovement : MonoBehaviour
     int move;
     bool manners;
     float height;
+
+    public int MaxHealth = 1;
+    private int currentHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +39,7 @@ public class enemyMovement : MonoBehaviour
         }
 
         //Destroy(gameObject, 7.0f);
-        if ((transform.position - TargetPosition).sqrMagnitude < 2)
+        if ((transform.position - TargetPosition).sqrMagnitude < 9)
         {
             move = 2;
         }
@@ -55,5 +58,25 @@ public class enemyMovement : MonoBehaviour
     void meleeAttack()
     {
         //Debug.Log("ATTACK mofo!!");
+    }
+
+    public void ReceiveDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void RestoreHealth(int health)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + health, health, MaxHealth);
+
+    }
+
+    public string GetTag()
+    {
+        return tag;
     }
 }
