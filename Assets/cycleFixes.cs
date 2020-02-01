@@ -5,18 +5,17 @@ using UnityEngine;
 public class cycleFixes : MonoBehaviour
 {
     public GameObject[] fixItems;
-    public GameObject robotBooty;
+    public GameObject daRobot;
     public float leastCycleTime;
     public float maxCycleTime;
-    Vector3 bootyPosition;
     //Vector3 bootyRotation;
     float spawnTime;
     public float startTime;
     bool stop;
+    GameObject currentDisplay;
     // Start is called before the first frame update
     void Start()
     {
-        bootyPosition = robotBooty.transform.position;
         //bootyRotation = robotBooty.transform.rotation;
         stop = true;
         StartCoroutine(cycleItems());
@@ -34,25 +33,26 @@ public class cycleFixes : MonoBehaviour
         while(stop)
         {
             int randItem = Random.Range(0, 4);
-            Instantiate(fixItems[randItem], bootyPosition, fixItems[randItem].transform.rotation);
+            currentDisplay = Instantiate(fixItems[randItem], transform.position, fixItems[randItem].transform.rotation);
+            currentDisplay.transform.parent = transform;
             if(randItem == 0)
             {
-                GameObject.Find("BigRobot").tag = "Bullet2";
+                daRobot.tag = "Bullet2";
             }
             else if(randItem == 1)
             {
-                GameObject.Find("BigRobot").tag = "Bullet4";
+                daRobot.tag = "Bullet4";
             }
             else if(randItem == 2)
             {
-                GameObject.Find("BigRobot").tag = "Bullet1";
+                daRobot.tag = "Bullet1";
             }
             else if(randItem == 3)
             {
-                GameObject.Find("BigRobot").tag = "Bullet3";
+                daRobot.tag = "Bullet3";
             }
             yield return new WaitForSeconds(spawnTime);
-            Destroy(GameObject.Find(fixItems[randItem].name + "(Clone)"));
+            Destroy(currentDisplay);
         }
     }
 }
