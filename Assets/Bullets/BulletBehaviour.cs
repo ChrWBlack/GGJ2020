@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour
 {
     public float Speed = 30.0f;
+    public string HealTag;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,19 @@ public class BulletBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        IDamageable damageable = collision.gameObject.GetComponentInParent<IDamageable>();
+        if (damageable != null)
+        {
+            if (damageable.GetTag().Equals(HealTag))
+            {
+                damageable.RestoreHealth(1);
+            }
+            else
+            {
+                damageable.ReceiveDamage(1);
+            }
+        }
+
         Destroy(gameObject);
     }
 }

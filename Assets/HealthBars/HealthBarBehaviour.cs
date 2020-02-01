@@ -18,8 +18,13 @@ public class HealthBarBehaviour : MonoBehaviour
         
     }
 
-    void SetValue(float current, float maximum)
+    public void SetValue(float current, float maximum)
     {
-        HealthBar.size = new Vector2(current / maximum, 1.0f);
+        HealthBar.size = new Vector2(Mathf.Clamp01(current / maximum), 1.0f);
+    }
+
+    public void AngleToCamera()
+    {
+        transform.LookAt(Camera.main.transform);
     }
 }
