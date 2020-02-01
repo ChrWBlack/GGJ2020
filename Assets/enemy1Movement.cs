@@ -33,6 +33,10 @@ public class enemy1Movement : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
+        if (SecondsToNextAttack > 0)
+        {
+            SecondsToNextAttack -= Time.deltaTime;
+        }
         if (move == 1)
         {
             movetoAttack();

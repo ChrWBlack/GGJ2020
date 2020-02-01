@@ -18,7 +18,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     private float SecToNextAttack = 0.0f;
 
     // true = melee, false = range
-    private bool attackModeMelee = false;
+    private bool attackModeMelee = true;
     private bool enemydetected = false;
 
     private List<Transform> rangeEnemies = new List<Transform>();
@@ -129,6 +129,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     public void ChangeWeapon(bool isMelee)
     {
         attackModeMelee = isMelee;
+        MeleeCollider.enabled = attackModeMelee;
     }
 
     private void OnTriggerEnter(Collider other)
