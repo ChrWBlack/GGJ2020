@@ -18,7 +18,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     private float SecToNextAttack = 0.0f;
 
     // true = melee, false = range
-    private bool attackModeMelee = true;
+    private bool attackModeMelee = false;
     private bool enemydetected = false;
 
     private List<Transform> rangeEnemies = new List<Transform>();
@@ -122,7 +122,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         GameObject projectile = Instantiate(ProjectilePrefab, ProjectileSpawn.position, transform.rotation);
         if (rangeEnemies.Count > 0)
         {
-            projectile.transform.LookAt(rangeEnemies[0]);
+            projectile.transform.LookAt(rangeEnemies[0].position + Vector3.up * 3);
         }
     }
 
@@ -131,10 +131,12 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         if (other.CompareTag("RangeEnemy"))
         {
             rangeEnemies.Add(other.transform);
+            other.GetComponentInParent<enemy1Movement>().SetTargetDamageable(this);
         }
         else if (other.CompareTag("MeleeEnemy"))
         {
             meleeEnemies.Add(other.transform);
+            other.GetComponentInParent<enemyMovement>().SetTargetDamageable(this);
         }
     }
 

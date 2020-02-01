@@ -303,6 +303,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 104324417, guid: a295d87a54241cc47bbc55e12170442c, type: 3}
+      propertyPath: m_Size.z
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 104324417, guid: a295d87a54241cc47bbc55e12170442c, type: 3}
+      propertyPath: m_Size.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 104324417, guid: a295d87a54241cc47bbc55e12170442c, type: 3}
+      propertyPath: m_Center.z
+      value: 20.01
+      objectReference: {fileID: 0}
     - target: {fileID: 180284654598161122, guid: a295d87a54241cc47bbc55e12170442c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -489,7 +501,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab:
-  - {fileID: 3698096702987702904, guid: 9777dc9f153ec02409578b389429ce88, type: 3}
+  - {fileID: 3698096702987702904, guid: 20c2c89d9de0a924db6e9f9cc87d869f, type: 3}
+  - {fileID: 2880356785617735630, guid: d5ad23f262e64fe4d91dd24bc1ed1668, type: 3}
   spawnValues: {x: 20, y: 0, z: 5}
   spawnMostWait: 2
   spawnLeastWait: 0.5
@@ -707,21 +720,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3802765391597650752, guid: 120d53c83eb06ef4d9f7ef4fbe8b07a4,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3802765391597650752, guid: 120d53c83eb06ef4d9f7ef4fbe8b07a4,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3802765391597650752, guid: 120d53c83eb06ef4d9f7ef4fbe8b07a4,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3802765391597650757, guid: 120d53c83eb06ef4d9f7ef4fbe8b07a4,
         type: 3}

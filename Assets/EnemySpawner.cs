@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
         while(stop)
         {
             randEnemy = Random.Range(0, enemyPrefab.Length);
-            spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), 1, Random.Range(-spawnValues.z, spawnValues.z));
+            spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), 0, Random.Range(-spawnValues.z, spawnValues.z));
             Instantiate(enemyPrefab[randEnemy], spawnPosition + transform.TransformPoint(0, 0, 0), gameObject.transform.rotation);
             yield return new WaitForSeconds(spawnWait);
         }

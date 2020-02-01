@@ -5,6 +5,7 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     public float rotationSpeed = 50.0f;
+    public float rotationDirection = 1.0f;
     public bool rotateX = false;
     public bool rotateY = false;
     public bool rotateZ = false;
@@ -15,15 +16,15 @@ public class Rotator : MonoBehaviour
     {
         if (rotateX)
         {
-            transform.Rotate(Vector3.right * rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.right * rotationSpeed * rotationDirection * Time.deltaTime);
         }
         if (rotateY)
         {
-            transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.up * rotationSpeed * rotationDirection * Time.deltaTime);
         }
         if (rotateZ)
         {
-            transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.forward * rotationSpeed * rotationDirection * Time.deltaTime);
         }
     }
 }

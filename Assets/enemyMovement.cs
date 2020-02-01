@@ -5,15 +5,15 @@ using UnityEngine;
 public class enemyMovement : MonoBehaviour, IDamageable
 {
     public Vector3 TargetPosition;
+    public Animator Animator;
     Vector3 direction;
     Vector3 newDirection;
     Rigidbody enemyBody;
     int move;
-    bool manners;
-    float height;
 
     public int MaxHealth = 1;
     private int currentHealth;
+    private IDamageable damageableTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +21,7 @@ public class enemyMovement : MonoBehaviour, IDamageable
         enemyBody = gameObject.GetComponent<Rigidbody>();
         //enemyBody.isKinematic = true;
         move = 1;
-        manners = true;
-        height = 1f;
+        currentHealth = MaxHealth;
     }
 
     // Update is called once per frame
@@ -39,7 +38,7 @@ public class enemyMovement : MonoBehaviour, IDamageable
         }
 
         //Destroy(gameObject, 7.0f);
-        if ((transform.position - TargetPosition).sqrMagnitude < 9)
+        if ((transform.position - TargetPosition).sqrMagnitude < 12)
         {
             move = 2;
         }
@@ -57,7 +56,12 @@ public class enemyMovement : MonoBehaviour, IDamageable
 
     void meleeAttack()
     {
-        //Debug.Log("ATTACK mofo!!");
+        Animator.SetInteger("AnimationState", 1);
+    }
+
+    public void SetTargetDamageable(IDamageable damageable)
+    {
+        damageableTarget = damageable;
     }
 
     public void ReceiveDamage(int damage)
