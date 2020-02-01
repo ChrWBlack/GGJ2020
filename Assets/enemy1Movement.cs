@@ -8,6 +8,7 @@ public class enemy1Movement : MonoBehaviour
     Vector3 direction;
     Vector3 newDirection;
     Vector3 randPosition;
+    float checkDistance;
     float stopTime1;
     float stopTime2;
     float rotationperMinute;
@@ -18,6 +19,7 @@ public class enemy1Movement : MonoBehaviour
         move = 1;
         randPosition = new Vector3(Random.Range(transform.position.x, bigRobot.transform.position.x), transform.position.y, Random.Range(transform.position.z, bigRobot.transform.position.z));
         rotationperMinute = 100.0f;
+        checkDistance = Random.Range(100.0f, 300.0f);
     }
 
     // Update is called once per frame
@@ -27,19 +29,13 @@ public class enemy1Movement : MonoBehaviour
         {
             movetoAttack();
         }
-        else if (move == 2 || transform.position == randPosition)
+        if(Vector3.SqrMagnitude(bigRobot.transform.position - transform.position) <= checkDistance)
         {
             fireAttack();
-        }
-        Destroy(gameObject, 7.0f);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.name == "Enemy1(Clone)" || other.gameObject.name == "Enemy(Clone)")
-        {
             move = 2;
         }
+
+        Destroy(gameObject, 7.0f);
     }
 
     void movetoAttack()
@@ -48,7 +44,7 @@ public class enemy1Movement : MonoBehaviour
         float speed = 5.0f * Time.deltaTime;
         newDirection = Vector3.RotateTowards(transform.forward, direction, speed, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDirection);
-        transform.position = Vector3.MoveTowards(transform.position, randPosition, speed);
+        transform.position = Vector3.MoveTowards(transform.position, bigRobot.transform.position, speed);
     }
 
     void fireAttack()
