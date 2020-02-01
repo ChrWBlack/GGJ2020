@@ -11,6 +11,9 @@ public class enemyMovement : MonoBehaviour, IDamageable
     Rigidbody enemyBody;
     int move;
 
+    public float AttacksPerSecond = 2;
+    private float SecondsToNextAttack = 0;
+
     public int MaxHealth = 1;
     private int currentHealth;
     private IDamageable damageableTarget;
@@ -22,11 +25,16 @@ public class enemyMovement : MonoBehaviour, IDamageable
         //enemyBody.isKinematic = true;
         move = 1;
         currentHealth = MaxHealth;
+        SecondsToNextAttack = 1.0f / AttacksPerSecond;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (SecondsToNextAttack > 0)
+        {
+            SecondsToNextAttack -= Time.deltaTime;
+        }
         //transform.Translate(Vector3.forward * Time.deltaTime * 5.0f);
         if(move == 1)
         {
@@ -57,6 +65,11 @@ public class enemyMovement : MonoBehaviour, IDamageable
     void meleeAttack()
     {
         Animator.SetInteger("AnimationState", 1);
+        if (SecondsToNextAttack <= 0 && damageableTarget != null)
+        {
+            damageableTarget.ReceiveDamage(1);
+            SecondsToNextAttack += 1.0f / AttacksPerSecond;
+        }
     }
 
     public void SetTargetDamageable(IDamageable damageable)

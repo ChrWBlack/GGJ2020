@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3698096702987702904}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -3.64, y: 4.03, z: -3.64}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 5729490610676384047}
   m_Father: {fileID: 0}
@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05083a18df04b845a350cc90e925f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetPosition: {x: 0, y: 0, z: 30}
+  TargetPosition: {x: 0, y: 0, z: 0}
   Animator: {fileID: 5831029721177880436}
+  AttacksPerSecond: 2
   MaxHealth: 1
 --- !u!54 &716985195133551963
 Rigidbody:

@@ -30,6 +30,58 @@ Transform:
   m_Father: {fileID: 7684578698196212655}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &543217973910921931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3406996678573732542}
+  - component: {fileID: 5507816932395046927}
+  m_Layer: 10
+  m_Name: Bootey
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3406996678573732542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543217973910921931}
+  m_LocalRotation: {x: -0.000174433, y: -7.1054274e-15, z: 1.7355705e-18, w: 1}
+  m_LocalPosition: {x: 0, y: 0.014536552, z: -0.025904916}
+  m_LocalScale: {x: 0.01, y: 0.010000001, z: 0.010000001}
+  m_Children: []
+  m_Father: {fileID: 1307487349463443517}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5507816932395046927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543217973910921931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28a5b9c0b65c8d04c94d62484f5f1398, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fixItems:
+  - {fileID: 6784492256902316273, guid: 08563b4f8e2e31449997df3d60727ac8, type: 3}
+  - {fileID: 3541171202965832175, guid: 7f957a7892185c84a8c1371c1560cbae, type: 3}
+  - {fileID: 3290340505946945163, guid: 16c840c1d99b9d449a8d9bdb360a8912, type: 3}
+  - {fileID: 7263920528112488714, guid: efe89f7b12918f84f9fb93e9c73fbf92, type: 3}
+  daRobot: {fileID: 3808679866406138097}
+  leastCycleTime: 10
+  maxCycleTime: 20
+  startTime: 0.5
 --- !u!1 &778219624314816534
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,8 +407,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 40, y: 9, z: 31.26}
-  m_Center: {x: 0, y: 0, z: 10}
+  m_Size: {x: 60, y: 9, z: 50}
+  m_Center: {x: 0, y: 0, z: 20.01}
 --- !u!95 &104324416
 Animator:
   serializedVersion: 3
@@ -810,6 +862,7 @@ Transform:
   - {fileID: 5453351922781920676}
   - {fileID: 8342385720884982355}
   - {fileID: 8071231994220169947}
+  - {fileID: 3406996678573732542}
   m_Father: {fileID: 407670089066109881}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.000001532354, y: -22.073614, z: 0.00000091558815}

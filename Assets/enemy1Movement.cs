@@ -12,6 +12,9 @@ public class enemy1Movement : MonoBehaviour, IDamageable
     float checkDistance;
     int move;
 
+    public float AttacksPerSecond = 2;
+    private float SecondsToNextAttack = 0;
+
     public int MaxHealth = 1;
     private int currentHealth;
 
@@ -24,11 +27,16 @@ public class enemy1Movement : MonoBehaviour, IDamageable
         randPosition = new Vector3(Random.Range(transform.position.x, TargetPosition.x), transform.position.y, Random.Range(transform.position.z, TargetPosition.z));
         checkDistance = Random.Range(500.0f, 1600.0f);
         currentHealth = MaxHealth;
+        SecondsToNextAttack = 1.0f / AttacksPerSecond;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (SecondsToNextAttack > 0)
+        {
+            SecondsToNextAttack -= Time.deltaTime;
+        }
         if (move == 1)
         {
             movetoAttack();
@@ -54,6 +62,11 @@ public class enemy1Movement : MonoBehaviour, IDamageable
     void fireAttack()
     {
         Animator.SetInteger("AnimationState", 1);
+        if (SecondsToNextAttack <= 0 && damageableTarget != null)
+        {
+            damageableTarget.ReceiveDamage(1);
+            SecondsToNextAttack += 1.0f / AttacksPerSecond;
+        }
     }
 
     public void SetTargetDamageable(IDamageable damageable)
