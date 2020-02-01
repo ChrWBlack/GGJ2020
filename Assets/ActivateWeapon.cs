@@ -9,9 +9,11 @@ public class ActivateWeapon : MonoBehaviour
     public bool isActivated = false;
     public GameObject label;
     public GameObject theOtherButton;
+    public GameObject tutorialManager;
     //button is this gameobject
 
     private float rotationDirection = 1.0f;
+    private bool isInTutorial = true;
 
     private void Update()
     {
@@ -22,7 +24,6 @@ public class ActivateWeapon : MonoBehaviour
             {
                 rotationDirection *= -1.0f;
             }
-            //Debug.Log(label.transform.rotation.z);
         }
     }
 
@@ -30,6 +31,12 @@ public class ActivateWeapon : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("BulletGeneric"))
         {
+            if (isInTutorial)
+            {
+                isInTutorial = false;
+                theOtherButton.GetComponent<ActivateWeapon>().DisableTutorial();
+                tutorialManager.GetComponent<Tutorial>().NewMessage(2);
+            }
             Destroy(other.gameObject);
             if (!isActivated)
             {
@@ -43,6 +50,11 @@ public class ActivateWeapon : MonoBehaviour
     public void SetActivated(bool isActivated)
     {
         this.isActivated = isActivated;
+    }
+
+    public void DisableTutorial()
+    {
+        isInTutorial = false;
     }
 
 }
