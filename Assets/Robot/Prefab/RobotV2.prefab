@@ -450,6 +450,8 @@ MonoBehaviour:
   UpperBody: {fileID: 4480647692689017196}
   ProjectileSpawn: {fileID: 1971571752}
   SecBetweenAttacks: 1
+  tutorialManager: {fileID: 0}
+  Barricade: {fileID: 0}
 --- !u!1 &3949407224497903537
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ public class enemy1Movement : MonoBehaviour, IDamageable
     public Animator Animator;
     public GameObject spawnEffect;
     public GameObject deathEffect;
+    public GameObject shootEffect;
+    public Transform shootEffectPos;
     Vector3 direction;
     Vector3 newDirection;
     Vector3 randPosition;
@@ -99,6 +101,11 @@ public class enemy1Movement : MonoBehaviour, IDamageable
     public string GetTag()
     {
         return tag;
+    }
+
+    public void PlayShootEffect()
+    {
+        Instantiate(shootEffect, shootEffectPos.position, Quaternion.identity);
     }
 }
 
