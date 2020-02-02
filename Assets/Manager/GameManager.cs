@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
         gameRunning = false;
         // TODO: SHOW GAME OVER GUI
         StartCoroutine(FadeInGameStateUI());
+        TimerUI.GetComponent<Animator>().SetTrigger("Highlight");
     }
 
     private void OnGameStart()
