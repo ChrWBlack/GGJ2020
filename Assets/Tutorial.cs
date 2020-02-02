@@ -28,10 +28,6 @@ public class Tutorial : MonoBehaviour
     public GameObject smokeSmall;
     public GameObject smokeBig;
 
-    public GameObject meteorSpawner;
-    public GameObject meteorVehicle1;
-    public GameObject meteorVehicle2;
-
     public event Action TutorialFinished;
 
     public bool newMessage;
@@ -80,19 +76,15 @@ public class Tutorial : MonoBehaviour
 
     private void Level2()
     {
-        tutText.text = "enemies will now spawn. Robo will atack when above 80% HP";
+        tutText.text = "enemies will now spawn. Robo will atack when above 80% HP.";
         enemySpawner.SetActive(true);
-        meteorSpawner.SetActive(true);
-        meteorVehicle1.GetComponent<MeteorVehicleBehavior>().TimeForMeteor();
-        meteorVehicle2.GetComponent<MeteorVehicleBehavior>().TimeForMeteor();
         TutorialFinished.Invoke();
-        ClearMessage();
+        StartCoroutine(TutorialEndMessage());
     }
 
     private void Start()
     {
         enemySpawner.SetActive(false);
-        meteorSpawner.SetActive(false);
 
         button1.SetActive(false);
         button2.SetActive(false);
@@ -135,5 +127,13 @@ public class Tutorial : MonoBehaviour
         bulletSpawn2.SetActive(true);
         Instantiate(smokeSmall, bulletSpawn3.transform.position, Quaternion.identity);
         bulletSpawn3.SetActive(true);
+    }
+
+    private IEnumerator TutorialEndMessage()
+    {
+        yield return new WaitForSeconds(2.5f);
+        tutText.text = "Good Luck!";
+        yield return new WaitForSeconds(1.0f);
+        ClearMessage();
     }
 }
