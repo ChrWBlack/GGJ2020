@@ -20,6 +20,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     public AudioClip shootingClip;
     public AudioClip deacticatedClip;
     public AudioClip shieldsUpClip;
+    public AudioClip damageClip;
     public GameObject gameOverEffect;
     private float healthPoints;
     private HealthBarBehaviour healthBar;
@@ -45,9 +46,9 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         return tag;
     }
 
-    public void ReceiveDamage(int damage)
+    public void ReceiveDamage(int damage, bool playClip = false)
     {
-        if (isUntouchable)
+        if (isUntouchable || isDead)
         {
             return;
         }
@@ -56,6 +57,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
             audioSource.PlayOneShot(deacticatedClip, 1.0f);
         }
         healthPoints = Mathf.Clamp(healthPoints - damage, 0, MaxHealth);
+        audioSource.PlayOneShot(damageClip);
         UpdateHealthBar();
 
         if (healthPoints <= 0)
@@ -63,6 +65,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
             gameOverEffect.SetActive(true);
             isDead = true;
             OnDeath.Invoke();
+            audioSource.Play();
         }
     }
 
@@ -204,6 +207,10 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
 
     public void SetUntachable(bool untouchable)
     {
+        if (isDead)
+        {
+            return;
+        }
         isUntouchable = untouchable;
         //Barricade.material.mainTextureScale = new Vector2(1, untouchable ? 1 : 7);
         StartCoroutine(FadeBarricade());

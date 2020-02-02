@@ -84,7 +84,7 @@ public class enemy1Movement : MonoBehaviour, IDamageable
         damageableTarget = damageable;
     }
 
-    public void ReceiveDamage(int damage)
+    public void ReceiveDamage(int damage, bool playClip = false)
     {
         currentHealth -= damage;
         if (currentHealth <= 0)

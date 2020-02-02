@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void ReceiveDamage(int damage);
+    void ReceiveDamage(int damage, bool playClip = false);
     void RestoreHealth(int health);
     string GetTag();
 }
