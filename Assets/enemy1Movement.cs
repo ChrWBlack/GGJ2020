@@ -9,6 +9,7 @@ public class enemy1Movement : MonoBehaviour, IDamageable
     public GameObject spawnEffect;
     public GameObject deathEffect;
     public GameObject shootEffect;
+    public AudioClip deathEffectClip;
     public Transform shootEffectPos;
     Vector3 direction;
     Vector3 newDirection;
@@ -88,7 +89,9 @@ public class enemy1Movement : MonoBehaviour, IDamageable
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
-            Instantiate(deathEffect, transform.position + new Vector3(0.0f, 2.0f, 0.0f), Quaternion.EulerAngles(-90.0f, 0.0f, 0.0f));
+            GameObject effect = Instantiate(deathEffect, transform.position + new Vector3(0.0f, 2.0f, 0.0f), Quaternion.EulerAngles(-90.0f, 0.0f, 0.0f));
+            effect.AddComponent<AudioSource>().clip = deathEffectClip;
+            effect.GetComponent<AudioSource>().Play();
             Destroy(gameObject);
         }
     }

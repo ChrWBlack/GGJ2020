@@ -14,6 +14,13 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     public Transform ProjectileSpawn;
     public float SecBetweenAttacks;
     public GameObject tutorialManager;
+    public AudioSource audioSource;
+    public AudioClip healingClip;
+    public AudioClip drillClip;
+    public AudioClip shootingClip;
+    public AudioClip deacticatedClip;
+    public AudioClip shieldsUpClip;
+    public GameObject gameOverEffect;
     private float healthPoints;
     private HealthBarBehaviour healthBar;
     private Animator animator;
@@ -44,11 +51,16 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         {
             return;
         }
+        if (healthPoints >= DamagedThreshold * MaxHealth && healthPoints - damage < DamagedThreshold * MaxHealth)
+        {
+            audioSource.PlayOneShot(deacticatedClip, 1.0f);
+        }
         healthPoints = Mathf.Clamp(healthPoints - damage, 0, MaxHealth);
         UpdateHealthBar();
 
         if (healthPoints <= 0)
         {
+            gameOverEffect.SetActive(true);
             isDead = true;
             OnDeath.Invoke();
         }
@@ -62,6 +74,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         }
         int unitsAttacking = rangeEnemies.Count + meleeEnemies.Count;
         healthPoints = Mathf.Clamp(healthPoints + (health * ( 2.0f - (MaxHealth - healthPoints) / MaxHealth) * (unitsAttacking + 1)), 0, MaxHealth);
+        audioSource.PlayOneShot(healingClip, 0.2f);
         if (isInTutorial && healthPoints >= 80)
         {
             tutorialManager.GetComponent<Tutorial>().NewMessage(1);
@@ -137,6 +150,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
             if (SecToNextAttack <= 0.0f && enemydetected && !isUntouchable)
             {
                 animator.SetTrigger(attackModeMelee ? RobotAnimationConstants.AnimDrill : RobotAnimationConstants.AnimShoot);
+                audioSource.PlayOneShot(attackModeMelee ? drillClip : shootingClip, 0.1f);
                 SecToNextAttack += SecBetweenAttacks;
                 enemydetected = false;
             }
@@ -200,9 +214,14 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
         float target = isUntouchable ? 1 : 7;
         float start = isUntouchable ? 7 : 1;
         Barricade.material.mainTextureScale = new Vector2(1, start);
+        if (isUntouchable)
+        {
+            audioSource.PlayOneShot(shieldsUpClip, 0.5f);
+        }
         while (Barricade.material.mainTextureScale.y != target)
         {
             yield return new WaitForEndOfFrame();
+
             float yScale = Mathf.Clamp(Barricade.material.mainTextureScale.y + ((target - start) * Time.deltaTime * 2.5f), 1, 7);
             Barricade.material.mainTextureScale = new Vector2(1, yScale);
         }

@@ -13,6 +13,7 @@ public class MeteorVehicleBehavior : MonoBehaviour
     public Transform smokeSpawn3;
 
     public GameObject smoke;
+    public AudioSource clip;
 
     private bool goToTarget;
     private bool goBack;
@@ -36,11 +37,9 @@ public class MeteorVehicleBehavior : MonoBehaviour
             {
                 goToTarget = false;
                 anim.SetTrigger("TriggerCannons");
-                for (int i = 0; i < numberOfShots; ++i)
-                {
-                    
-                    SpawnMeteor();
-                }
+
+                SpawnMeteor();
+                clip.Play();
                 numberOfShots++;
             }
         }

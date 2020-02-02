@@ -6,18 +6,9 @@ public class AmmoStationBehaviour : MonoBehaviour
 {
     public GameObject BulletPrefab;
     public GameObject PickUpEffect;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public AudioSource aSource;
+    public AudioClip aClip;
+    public AudioClip aClip2;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -27,6 +18,9 @@ public class AmmoStationBehaviour : MonoBehaviour
             PlayerShootBehaviour psb = gObj.GetComponentInParent<PlayerShootBehaviour>();
             if (psb != null)
             {
+                aSource.PlayOneShot(aClip, 0.05f);
+                aSource.PlayOneShot(aClip2, 0.1f);
+
                 Instantiate(PickUpEffect, transform.position, Quaternion.identity);
                 psb.BulletPrefab = BulletPrefab;
             }

@@ -11,6 +11,7 @@ public class ActivateWeapon : MonoBehaviour
     public GameObject theOtherButton;
     public GameObject tutorialManager;
     public GameObject hitEffect;
+    public AudioSource clip;
     //button is this gameobject
 
     private float rotationDirection = 1.0f;
@@ -42,6 +43,7 @@ public class ActivateWeapon : MonoBehaviour
             Destroy(other.gameObject);
             if (!isActivated)
             {
+                clip.Play();
                 isActivated = true;
                 theOtherButton.GetComponent<ActivateWeapon>().SetActivated(!isActivated);
                 bigRobot.GetComponent<RobotBehaviour>().ChangeWeapon(isMelee);
