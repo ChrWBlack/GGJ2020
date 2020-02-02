@@ -32,7 +32,7 @@ public class birthingMetorites : MonoBehaviour
         yield return new WaitForSeconds(spawnStart);
         while(stop)
         {
-            spawnPosition = new Vector3(Random.Range(-spawnValues.x, spawnValues.x), gameObject.transform.position.y, Random.Range(-spawnValues.z, spawnValues.x));
+            spawnPosition = new Vector3(gameObject.transform.position.x + Random.Range(-spawnValues.x, spawnValues.x), gameObject.transform.position.y, gameObject.transform.position.z + Random.Range(-spawnValues.z, spawnValues.x));
             GameObject tempMeteor = Instantiate(fallingMeteor, spawnPosition, fallingMeteor.transform.rotation);
             yield return new WaitForSeconds(spawnWait);
         }

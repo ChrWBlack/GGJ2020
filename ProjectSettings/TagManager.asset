@@ -11,6 +11,8 @@ TagManager:
   - MeleeEnemy
   - RangeEnemy
   - BulletGeneric
+  - FxTemporaire
+  - Meteorite
   layers:
   - Default
   - TransparentFX
