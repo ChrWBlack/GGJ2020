@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 30
   HealTag: Bullet3
+  hitEffect: {fileID: 100000, guid: 979632a27455af442bd2d8f36eb0ffce, type: 3}
 --- !u!1 &8024679435836536550
 GameObject:
   m_ObjectHideFlags: 0

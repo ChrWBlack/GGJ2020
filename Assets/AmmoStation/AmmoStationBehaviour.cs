@@ -5,6 +5,7 @@ using UnityEngine;
 public class AmmoStationBehaviour : MonoBehaviour
 {
     public GameObject BulletPrefab;
+    public GameObject PickUpEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,7 @@ public class AmmoStationBehaviour : MonoBehaviour
             PlayerShootBehaviour psb = gObj.GetComponentInParent<PlayerShootBehaviour>();
             if (psb != null)
             {
+                Instantiate(PickUpEffect, transform.position, Quaternion.identity);
                 psb.BulletPrefab = BulletPrefab;
             }
         }

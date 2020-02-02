@@ -109,3 +109,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 982362618282996635, guid: ee3057a57e43b434ea257bebf17eca0b,
     type: 3}
+  PickUpEffect: {fileID: 1628744458893394, guid: e243632bb3aff9549abdcfcc2ef0c4f0,
+    type: 3}
