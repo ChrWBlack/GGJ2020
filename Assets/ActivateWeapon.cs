@@ -10,6 +10,7 @@ public class ActivateWeapon : MonoBehaviour
     public GameObject label;
     public GameObject theOtherButton;
     public GameObject tutorialManager;
+    public GameObject hitEffect;
     //button is this gameobject
 
     private float rotationDirection = 1.0f;
@@ -37,6 +38,7 @@ public class ActivateWeapon : MonoBehaviour
                 theOtherButton.GetComponent<ActivateWeapon>().DisableTutorial();
                 tutorialManager.GetComponent<Tutorial>().NewMessage(2);
             }
+            Instantiate(hitEffect, other.gameObject.transform.position, Quaternion.identity);
             Destroy(other.gameObject);
             if (!isActivated)
             {

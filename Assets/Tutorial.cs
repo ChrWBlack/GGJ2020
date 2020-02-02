@@ -28,6 +28,9 @@ public class Tutorial : MonoBehaviour
     public GameObject smokeSmall;
     public GameObject smokeBig;
 
+    public GameObject meteorVehicle1;
+    public GameObject meteorVehicle2;
+
     public event Action TutorialFinished;
 
     public bool newMessage;
@@ -78,6 +81,8 @@ public class Tutorial : MonoBehaviour
     {
         tutText.text = "enemies will now spawn. Robo will atack when above 80% HP";
         enemySpawner.SetActive(true);
+        meteorVehicle1.GetComponent<MeteorVehicleBehavior>().TimeForMeteor();
+        meteorVehicle2.GetComponent<MeteorVehicleBehavior>().TimeForMeteor();
         TutorialFinished.Invoke();
         ClearMessage();
     }
@@ -88,7 +93,7 @@ public class Tutorial : MonoBehaviour
 
         button1.SetActive(false);
         button2.SetActive(false);
-
+        
         spotlight.SetActive(false);
         spotlight1.SetActive(false);
         spotlight2.SetActive(false);

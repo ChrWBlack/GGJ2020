@@ -6,6 +6,7 @@ public class BulletBehaviour : MonoBehaviour
 {
     public float Speed = 30.0f;
     public string HealTag;
+    public GameObject hitEffect;
 
     // Start is called before the first frame update
     void Start()
@@ -27,13 +28,14 @@ public class BulletBehaviour : MonoBehaviour
             if (damageable.GetTag().Equals(HealTag))
             {
                 damageable.RestoreHealth(1);
+                
             }
             else
             {
                 damageable.ReceiveDamage(1);
             }
         }
-
+        Instantiate(hitEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 }

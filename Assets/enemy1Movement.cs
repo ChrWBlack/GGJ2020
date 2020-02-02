@@ -7,6 +7,7 @@ public class enemy1Movement : MonoBehaviour, IDamageable
     public Vector3 TargetPosition;
     public Animator Animator;
     public GameObject spawnEffect;
+    public GameObject deathEffect;
     Vector3 direction;
     Vector3 newDirection;
     Vector3 randPosition;
@@ -85,6 +86,7 @@ public class enemy1Movement : MonoBehaviour, IDamageable
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
+            Instantiate(deathEffect, transform.position + new Vector3(0.0f, 2.0f, 0.0f), Quaternion.EulerAngles(-90.0f, 0.0f, 0.0f));
             Destroy(gameObject);
         }
     }
