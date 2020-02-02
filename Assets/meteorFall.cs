@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class meteorFall : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject explosionEffect;
 
     // Update is called once per frame
     void Update()
@@ -18,7 +14,7 @@ public class meteorFall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // TODO (maybe): Activate some explosion
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
         Debug.Log("Ground detected");
         Destroy(gameObject);
     }
