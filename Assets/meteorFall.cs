@@ -18,10 +18,8 @@ public class meteorFall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Ground")
-        {
-            Debug.Log("Ground detected");
-            Destroy(gameObject);
-        }
+        // TODO (maybe): Activate some explosion
+        Debug.Log("Ground detected");
+        Destroy(gameObject);
     }
 }

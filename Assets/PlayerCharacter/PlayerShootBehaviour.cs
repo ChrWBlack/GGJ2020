@@ -12,6 +12,9 @@ public class PlayerShootBehaviour : MonoBehaviour
     private float SecToNextShot = 0.0f;
     private Animator animator;
 
+    public float DizzyTime = 1.2f;
+    private bool isDizzy = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,11 @@ public class PlayerShootBehaviour : MonoBehaviour
         if (SecToNextShot > 0.0f)
         {
             SecToNextShot -= Time.deltaTime;
+        }
+
+        if (isDizzy)
+        {
+            return;
         }
 
         // Get shooting direction
@@ -52,5 +60,20 @@ public class PlayerShootBehaviour : MonoBehaviour
         {
             animator.SetInteger(PlayerAnimationConstants.AnimationState, PlayerAnimationConstants.PlayerRunning);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 11)
+        {
+            StartCoroutine(DizzyRoutine());
+        }
+    }
+
+    IEnumerator DizzyRoutine()
+    {
+        isDizzy = true;
+        yield return new WaitForSeconds(DizzyTime);
+        isDizzy = false;
     }
 }
