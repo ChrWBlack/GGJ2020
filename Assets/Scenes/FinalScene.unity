@@ -1361,6 +1361,10 @@ PrefabInstance:
       propertyPath: shieldsUpClip
       value: 
       objectReference: {fileID: 8300000, guid: 5ef0e40a61a54b246a79cd6458eb3d46, type: 3}
+    - target: {fileID: 104324414, guid: a295d87a54241cc47bbc55e12170442c, type: 3}
+      propertyPath: damageClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a737b568727801b40b46725b1169c5ef, type: 3}
     - target: {fileID: 104324417, guid: a295d87a54241cc47bbc55e12170442c, type: 3}
       propertyPath: m_Size.z
       value: 48.157936

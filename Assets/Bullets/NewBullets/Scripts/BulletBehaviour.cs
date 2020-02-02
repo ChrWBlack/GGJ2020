@@ -32,7 +32,7 @@ public class BulletBehaviour : MonoBehaviour
             }
             else
             {
-                damageable.ReceiveDamage(1);
+                damageable.ReceiveDamage(1, true);
             }
         }
         Instantiate(hitEffect, transform.position, Quaternion.identity);

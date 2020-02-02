@@ -57,7 +57,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
             audioSource.PlayOneShot(deacticatedClip, 1.0f);
         }
         healthPoints = Mathf.Clamp(healthPoints - damage, 0, MaxHealth);
-        audioSource.PlayOneShot(damageClip);
+        audioSource.PlayOneShot(damageClip, 0.3f);
         UpdateHealthBar();
 
         if (healthPoints <= 0)
