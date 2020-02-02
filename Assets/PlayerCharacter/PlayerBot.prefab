@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 4669907543329756587}
   - component: {fileID: 4669907543329756564}
   - component: {fileID: 4669907543329756565}
+  - component: {fileID: 473434345}
   m_Layer: 8
   m_Name: PlayerBot
   m_TagString: Player
@@ -80,7 +81,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BottomHalf: {fileID: 7427113109346566410}
-  MoveSpeed: 10
+  MoveSpeed: 20
+  DizzySwirls: {fileID: 139359208195953364}
+  DizzyTime: 1.2
 --- !u!114 &4669907543329756564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,6 +100,7 @@ MonoBehaviour:
   BulletSpawn: {fileID: 452275087}
   SecBetweenShots: 0.1
   BulletPrefab: {fileID: 0}
+  DizzyTime: 1.2
 --- !u!54 &4669907543329756565
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -111,8 +115,22 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!136 &473434345
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4669907543329756566}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3.2459073
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.3597991, z: 0}
 --- !u!1001 &139359208195921012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,6 +192,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 352304b7fbe11f445970df6ae36e6227, type: 3}
+--- !u!1 &139359208195953364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 352304b7fbe11f445970df6ae36e6227,
+    type: 3}
+  m_PrefabInstance: {fileID: 139359208195921012}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &139359208196050676 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 352304b7fbe11f445970df6ae36e6227,

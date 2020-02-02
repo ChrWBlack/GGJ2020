@@ -19,6 +19,8 @@ public class MeteorVehicleBehavior : MonoBehaviour
     private int numberOfShots = 2;
     private Animator anim;
 
+    public GameObject meteorSpawn;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -80,5 +82,9 @@ public class MeteorVehicleBehavior : MonoBehaviour
     void SpawnMeteor()
     {
         //spawn meteor
+        if (meteorSpawn != null)
+        {
+            meteorSpawn.SetActive(true);
+        }
     }
 }
