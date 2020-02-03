@@ -37,8 +37,8 @@ public class PlayerShootBehaviour : MonoBehaviour
 
         // Get shooting direction
         Vector3 shootDirection = Vector3.zero;
-        shootDirection.x = Input.GetAxis("Horizontal2");
-        shootDirection.z = Input.GetAxis("Vertical2");
+        shootDirection.x = Input.GetAxisRaw("Horizontal2");
+        shootDirection.z = Input.GetAxisRaw("Vertical2");
 
         if (shootDirection.sqrMagnitude > 0.5f)
         {

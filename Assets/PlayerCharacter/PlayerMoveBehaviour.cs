@@ -8,6 +8,7 @@ public class PlayerMoveBehaviour : MonoBehaviour
     public float MoveSpeed;
     public GameObject DizzySwirls;
     public float DizzyTime = 1.2f;
+    public CharacterController characterController;
     private bool isDizzy = false;
 
     // Start is called before the first frame update
@@ -25,15 +26,17 @@ public class PlayerMoveBehaviour : MonoBehaviour
         }
         // Get movement direction
         Vector3 moveDirection = Vector3.zero;
-        moveDirection.x = Input.GetAxis("Horizontal");
-        moveDirection.z = Input.GetAxis("Vertical");
+        moveDirection.x = Input.GetAxisRaw("Horizontal");
+        moveDirection.z = Input.GetAxisRaw("Vertical");
+        moveDirection.y -= 20.0f * Time.deltaTime;
 
         if (moveDirection.sqrMagnitude > 0.5f)
         {
             moveDirection.Normalize();
 
             // Move character
-            transform.position += moveDirection * Time.deltaTime * MoveSpeed;
+            //transform.position += moveDirection * Time.deltaTime * MoveSpeed;
+            characterController.Move(moveDirection * Time.deltaTime * MoveSpeed);
 
             // Rotate bottom half of character
             float rotationAngle = Vector3.SignedAngle(BottomHalf.forward, moveDirection, BottomHalf.up);
