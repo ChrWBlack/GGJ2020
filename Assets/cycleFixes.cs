@@ -8,26 +8,39 @@ public class cycleFixes : MonoBehaviour
     public GameObject daRobot;
     public float leastCycleTime;
     public float maxCycleTime;
+
+    public GameObject smileyFaceEffect;
+
     //Vector3 bootyRotation;
     float spawnTime;
     public float startTime;
-    bool stop;
+    public bool stop = true;
     GameObject currentDisplay;
     // Start is called before the first frame update
     void Start()
     {
         //bootyRotation = robotBooty.transform.rotation;
         stop = true;
-        StartCoroutine(cycleItems());
+        StartCoroutine(newItem());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeDisplay()
     {
-
+        
+        StopAllCoroutines();
+        daRobot.GetComponent<RobotBehaviour>().SetUntachable(true);
+        stop = true;
+        Destroy(currentDisplay);
+        Instantiate(smileyFaceEffect, transform.position, Quaternion.identity);
+        StartCoroutine(newItem());
     }
 
-    IEnumerator cycleItems()
+    public void IncreaseDisplaySize()
+    {
+        currentDisplay.transform.localScale += new Vector3 (0.05f, 0.05f, 0.05f);
+    }
+
+    IEnumerator newItem()
     {
         yield return new WaitForSeconds(startTime);
         while(stop)
@@ -41,7 +54,7 @@ public class cycleFixes : MonoBehaviour
             currentDisplay.transform.localScale = Vector3.zero;
             while (currentDisplay.transform.localScale.x < targetScale.x  - float.Epsilon)
             {
-                currentDisplay.transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, timer * 1.0f);
+                currentDisplay.transform.localScale = Vector3.Lerp(Vector3.zero, targetScale, timer * 0.5f);
                 yield return new WaitForEndOfFrame();
                 timer += Time.deltaTime;
             }
@@ -63,19 +76,20 @@ public class cycleFixes : MonoBehaviour
             {
                 daRobot.tag = "Bullet3";
             }
-            spawnTime = Random.Range(leastCycleTime, maxCycleTime);
-            yield return new WaitForSeconds(spawnTime);
-
-            daRobot.GetComponent<RobotBehaviour>().SetUntachable(true);
-            Vector3 startScale = currentDisplay.transform.localScale;
-            timer = 0.0f;
-            while (currentDisplay.transform.localScale.x > float.Epsilon)
-            {
-                currentDisplay.transform.localScale = Vector3.Lerp(startScale, Vector3.zero, timer * 1.5f);
-                yield return new WaitForEndOfFrame();
-                timer += Time.deltaTime;
-            }
-            Destroy(currentDisplay);
+            stop = false;
+            //spawnTime = Random.Range(leastCycleTime, maxCycleTime);
+            //yield return new WaitForSeconds(spawnTime);
+            //
+            //daRobot.GetComponent<RobotBehaviour>().SetUntachable(true);
+            //Vector3 startScale = currentDisplay.transform.localScale;
+            //timer = 0.0f;
+            //while (currentDisplay.transform.localScale.x > float.Epsilon)
+            //{
+            //    currentDisplay.transform.localScale = Vector3.Lerp(startScale, Vector3.zero, timer * 1.5f);
+            //    yield return new WaitForEndOfFrame();
+            //    timer += Time.deltaTime;
+            //}
+            //Destroy(currentDisplay);
         }
     }
 }

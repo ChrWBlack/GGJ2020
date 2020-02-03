@@ -10,6 +10,7 @@ public class Tutorial : MonoBehaviour
     public GameObject bigRobot;
     public GameObject button1;
     public GameObject button2;
+    public GameObject pressSpaceText;
 
     public Image robotIcon;
     public CanvasGroup textGroup;
@@ -32,13 +33,17 @@ public class Tutorial : MonoBehaviour
 
     public bool newMessage;
 
+    private string[] messages = new string[7];
+    private bool inputAccepted = true;
+    private int currentMessage = 0;
+
     public void NewMessage(int tutLevel)
     {
         newMessage = true;
         switch (tutLevel)
         {
             case 0:
-                Level0();
+                Level0(currentMessage);
                 break;
             case 1:
                 Level1();
@@ -55,19 +60,41 @@ public class Tutorial : MonoBehaviour
         StopAllCoroutines();
     }
 
-    private void Level0()
+    private void Level0(int messageIndex)
     {
-        tutText.text = "use the correct ammo to heal robo";
-        StartCoroutine(TutWait0(6.0f));
-        spotlight.SetActive(true);
-        spotlight1.SetActive(true);
-        spotlight2.SetActive(true);
-        spotlight3.SetActive(true);
+        tutText.text = messages[messageIndex];
+        //StartCoroutine(TutWait0(3.0f));
+        if (messageIndex == 0)
+        {
+            spotlight.SetActive(true);
+            spotlight1.SetActive(true);
+            spotlight2.SetActive(true);
+            spotlight3.SetActive(true);
+        }
+        
+        if (messageIndex == 2)
+        {
+            Instantiate(smokeSmall, bulletSpawn.transform.position, Quaternion.identity);
+            bulletSpawn.SetActive(true);
+            Instantiate(smokeSmall, bulletSpawn1.transform.position, Quaternion.identity);
+            bulletSpawn1.SetActive(true);
+            Instantiate(smokeSmall, bulletSpawn2.transform.position, Quaternion.identity);
+            bulletSpawn2.SetActive(true);
+            Instantiate(smokeSmall, bulletSpawn3.transform.position, Quaternion.identity);
+            bulletSpawn3.SetActive(true);
+        }
+        if (messageIndex == 6)
+        {
+            inputAccepted = false;
+            pressSpaceText.SetActive(false);
+        }
     }
 
     private void Level1()
     {
-        tutText.text = "use any bullet to swap between melee and ranged weapons";
+        inputAccepted = false;
+        pressSpaceText.SetActive(false);
+        tutText.text = "choose one oF the weapons.";
         Instantiate(smokeBig, button1.transform.position, Quaternion.identity);
         button1.SetActive(true);
         Instantiate(smokeBig, button2.transform.position, Quaternion.identity);
@@ -76,7 +103,7 @@ public class Tutorial : MonoBehaviour
 
     private void Level2()
     {
-        tutText.text = "enemies will now spawn. Robo will atack when above 80% HP.";
+        tutText.text = "enemies will now spawn!";
         enemySpawner.SetActive(true);
         TutorialFinished.Invoke();
         StartCoroutine(TutorialEndMessage());
@@ -98,6 +125,15 @@ public class Tutorial : MonoBehaviour
         bulletSpawn1.SetActive(false);
         bulletSpawn2.SetActive(false);
         bulletSpawn3.SetActive(false);
+
+        messages[0] = "use the correct ammo to heal robo";
+        messages[1] = "There are Four types of ammo you can use.";
+        messages[2] = "Walk over them to switch between ammo types.";
+        messages[3] = "Use the arrow keys to aim and Fire.";
+        messages[4] = "Hitting ROBO with the wrong ammo type will damage him instead!";
+        messages[5] = "Robo will only atack when above 80% HP.";
+        messages[6] = "Try and heal ROBO.";
+
         NewMessage(0);
     }
 
@@ -113,12 +149,18 @@ public class Tutorial : MonoBehaviour
             if (textGroup.alpha > 0.0f)
                 textGroup.alpha += -2f * Time.deltaTime;
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) && inputAccepted)
+        {
+            currentMessage++;
+            Level0(currentMessage);
+        }
     }
 
     private IEnumerator TutWait0(float seconds)
     {
         yield return new WaitForSeconds(seconds);
-        tutText.text = "using incorect ammo will damage robo";
+        tutText.text = "There are Four types of ammo you can use.";
         Instantiate(smokeSmall, bulletSpawn.transform.position, Quaternion.identity);
         bulletSpawn.SetActive(true);
         Instantiate(smokeSmall, bulletSpawn1.transform.position, Quaternion.identity);
@@ -127,6 +169,16 @@ public class Tutorial : MonoBehaviour
         bulletSpawn2.SetActive(true);
         Instantiate(smokeSmall, bulletSpawn3.transform.position, Quaternion.identity);
         bulletSpawn3.SetActive(true);
+        yield return new WaitForSeconds(seconds);
+        tutText.text = "Walk over them to switch between ammo types.";
+        yield return new WaitForSeconds(seconds);
+        tutText.text = "Use the arrow keys to aim and Fire.";
+        yield return new WaitForSeconds(seconds);
+        tutText.text = "Hitting ROBO with the wrong ammo type will damage him instead!";
+        yield return new WaitForSeconds(seconds);
+        tutText.text = "Robo will only atack when above 80% HP.";
+        yield return new WaitForSeconds(seconds);
+        tutText.text = "Try and heal ROBO.";
     }
 
     private IEnumerator TutorialEndMessage()

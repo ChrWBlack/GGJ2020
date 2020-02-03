@@ -22,6 +22,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     public AudioClip shieldsUpClip;
     public AudioClip damageClip;
     public GameObject gameOverEffect;
+    public cycleFixes bootey;
     private float healthPoints;
     private HealthBarBehaviour healthBar;
     private Animator animator;
@@ -35,6 +36,7 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
     private bool isUntouchable = true;
     private bool isInTutorial = true;
     private bool isDead = false;
+    private int bonusHealCounter = 0;
 
     private List<Transform> rangeEnemies = new List<Transform>();
     private List<Transform> meleeEnemies = new List<Transform>();
@@ -79,8 +81,17 @@ public class RobotBehaviour : MonoBehaviour, IDamageable
             return;
         }
         int unitsAttacking = rangeEnemies.Count + meleeEnemies.Count;
-        healthPoints = Mathf.Clamp(healthPoints + (health * ( 2.0f - (MaxHealth - healthPoints) / MaxHealth) * (unitsAttacking + 1)), 0, MaxHealth);
+        //healthPoints = Mathf.Clamp(healthPoints + (health * ( 2.0f - (MaxHealth - healthPoints) / MaxHealth) * (unitsAttacking + 1)), 0, MaxHealth);
+        healthPoints = Mathf.Clamp(healthPoints + (health * ( 3.0f - (MaxHealth - healthPoints) / MaxHealth)), 0, MaxHealth);
         audioSource.PlayOneShot(healingClip, 0.2f);
+        bonusHealCounter++;
+        bootey.IncreaseDisplaySize();
+        if (bonusHealCounter >= 30)
+        {
+            healthPoints = Mathf.Clamp(healthPoints + 80, 0, MaxHealth);
+            bonusHealCounter = 0;
+            bootey.ChangeDisplay();
+        }
         if (isInTutorial && healthPoints >= 80)
         {
             tutorialManager.GetComponent<Tutorial>().NewMessage(1);
